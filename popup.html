@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/assets/stylesheets/popup.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="ui grid container">
+      <div class="sixteen wide center aligned column">
+        <h1 id="title">
+          <span style="color: #619fff">COGIT</span><span style="color: #c3d9fb">COGIT</span>
+        </h1>
+        <p class="onboarding">
+          Sync your code from algorithm platform to
+          <span style="color: #000000">GitHub</span>
+        </p>
+        <div id="active">
+          <img id="imageLogo" style="width: 50px" /><br />
+          <p style="font-weight: bold"></p>
+        </div>
+
+        <!-- Authentication mode -->
+        <div id="auth_mode" style="display: block">
+          <p id="content">
+            Authenticate with GitHub to use<br />
+            COGITCOGIT
+          </p>
+          <button id="authenticate" class="ui secondary button">
+            <i class="icon github"></i>
+            Authenticate
+          </button>
+        </div>
+
+        <div id="cogitLink" style="display: none">
+          <img src="./assets/images/cogitLinkBtn.png" alt="COGIT Logo" />
+        </div>
+      </div>
+    </div>
+    <script src="assets/javascripts/popup.js"></script>
+    <script src="assets/javascripts/authorize.js"></script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+{
+  "name": "코깃코깃 (CogitCogit)",
+  "description": "백준/프로그래머스 코드 자동 commit 및 알고리즘 스터디 관리",
+  "version": "1.0.2",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "/assets/javascripts/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.acmicpc.net/submit/*"],
+      "js": ["/assets/javascripts/baekjoon/baekjoonCode.js"]
+    },
+    {
+      "matches": ["https://www.acmicpc.net/status?*"],
+      "js": [
+        "/assets/javascripts/baekjoon/baekjoonResult.js",
+        "/assets/javascripts/baekjoon/baekjoonLanguage.js",
+        "/assets/javascripts/sendCode.js",
+        "/assets/javascripts/authorize.js"
+      ]
+    },
+    {
+      "matches": ["https://school.programmers.co.kr/learn/courses/30/lessons/*"],
+      "js": [
+        "/assets/javascripts/programmers/programmers.js",
+        "/assets/javascripts/programmers/programmersLanguage.js",
+        "/assets/javascripts/sendCode.js",
+        "/assets/javascripts/authorize.js"
+      ]
+    },
+    {
+      "matches": ["https://cogit.kr/*"],
+      "js": ["/assets/javascripts/authorize.js"]
+    }
+  ],
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "/assets/images/pets.png",
+      "32": "/assets/images/pets.png",
+      "48": "/assets/images/pets.png",
+      "128": "/assets/images/pets.png"
+    }
+  },
+  "icons": {
+    "16": "/assets/images/cogit.PNG",
+    "32": "/assets/images/cogit.PNG",
+    "48": "/assets/images/cogit.PNG",
+    "128": "/assets/images/cogit.PNG"
+  }
+}
