@@ -40,10 +40,8 @@ async function getRepo(hook, token) {
   }).then((res) => {
     console.log(res.status);
     if (res.status === 200) {
-      console.log(res.status, 'asdasd');
       return true;
     } else {
-      console.log(res.status, 'bbb');
       return false;
     }
   });
@@ -55,7 +53,7 @@ async function createHook() {
     // TODO: user name 가져오기
     const user = '';
     const name = document.getElementById('name').value;
-    console.log(name);
+    console.log('name is: ', name);
     // TODO: name이 영어로만 이루어져있는지 확인
     if (name === '') {
       return;
