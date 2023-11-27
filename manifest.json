@@ -30,7 +30,7 @@
       ]
     },
     {
-      "matches": ["https://cogit.kr/*"],
+      "matches": ["https://github.com/*"],
       "js": ["/assets/javascripts/authorize.js"]
     }
   ],

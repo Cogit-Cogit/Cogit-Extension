@@ -1,6 +1,7 @@
 const AUTHORIZATION_URL = 'https://github.com/login/oauth/authorize';
 const CLIENT_ID = '8f0485d786b3f5eba00e';
-const REDIRECT_URL = 'https://cogit.kr/redirect'; // 변경 필요
+const GITHUB_CLIENT_SECRET = '45ef1ad0380204292293bacc888173c17d039ad5';
+const REDIRECT_URL = 'https://github.com'; // 변경 필요
 const SCOPES = [
   'repo',
   'admin:repo_hook',
