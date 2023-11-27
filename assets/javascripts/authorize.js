@@ -1,4 +1,3 @@
-const AUTHORIZATION_URL = 'https://github.com/login/oauth/authorize';
 const CLIENT_ID = '8f0485d786b3f5eba00e';
 const GITHUB_CLIENT_SECRET = '45ef1ad0380204292293bacc888173c17d039ad5';
 
@@ -35,16 +34,42 @@ function getAccessToken(code) {
         response.json().then((data) => {
           const accessToken = data.access_token;
           chrome.storage.local.set({ cogit_token: accessToken });
+          getUserInfo(accessToken);
         });
+        window.close();
       } else {
         throw new Error('토큰을 요청하지 못했습니다.');
       }
-      window.close();
     })
     .catch((error) => {
       console.error('Error:', error);
     });
 }
+
+/* user 정보 가지고 오기*/
+function getUserInfo(accessToken) {
+  fetch('https://api.github.com/user', {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      Authorization: "Bearer " + accessToken
+    },
+  })
+    .then((response) => {
+      if (response.ok) { 
+        response.json().then((data) => {
+          const gitHubId = data.login;
+          chrome.storage.local.set({ cogit_id: gitHubId });
+        });
+      } else {
+        throw new Error('사용자 정보를 가져오지 못하였습니다.');
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}
+
 /* Check for open pipe */
 if (window.location.host === 'github.com' && window.location.href.includes('?code=')) {
   const link = window.location.href;
