@@ -16,6 +16,7 @@ function parseAccessCode(url) {
   }
 }
 
+/* 깃허브 엑세스 토큰 발급 */
 function getAccessToken(code) {
   fetch('https://github.com/login/oauth/access_token', {
     method: 'POST',
@@ -30,13 +31,15 @@ function getAccessToken(code) {
     }),
   })
     .then((response) => {
-      response.json().then((data) => {
-        const accessToken = data.access_token;
-        chrome.storage.local.set({ cogit_token: accessToken });
-        // chrome.storage.local.get(['cogit_token'],(data) => {
-        //   console.log(data.cogit_token);  
-        // })
-      });
+      if (response.ok) {
+        response.json().then((data) => {
+          const accessToken = data.access_token;
+          chrome.storage.local.set({ cogit_token: accessToken });
+        });
+      } else {
+        throw new Error('토큰을 요청하지 못했습니다.');
+      }
+      window.close();
     })
     .catch((error) => {
       console.error('Error:', error);
