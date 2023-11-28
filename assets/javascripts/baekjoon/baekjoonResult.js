@@ -1,5 +1,3 @@
-const PLATFORM_URL = 'https://www.acmicpc.net/problem/';
-
 function checkActive(callback) {
   //코깃 활성화 여부
   chrome.storage.local.get('active', function (result) {
@@ -24,7 +22,7 @@ function getResult(isActive) {
       firstSolutionElement = document.querySelector('[id^="solution-"]');
       resultElement = firstSolutionElement.querySelector('.result');
       let loadingImg = document.createElement('img');
-      loadingImg.src = 'https://cogitusercode.s3.ap-northeast-2.amazonaws.com/assets/loading.gif';
+      loadingImg.src = chrome.runtime.getURL("assets/images/loading.gif");
       loadingImg.style = 'width:20px';
       resultElement.appendChild(loadingImg);
 
@@ -56,10 +54,10 @@ function getResult(isActive) {
           if (currentContent.includes('맞았습니다')) {
             loadingImg.remove();
             var cogitImg = document.createElement('img');
-            cogitImg.src = 'https://cogitusercode.s3.ap-northeast-2.amazonaws.com/assets/cogit.png';
+            cogitImg.src = chrome.runtime.getURL("assets/images/cogit.png");
             cogitImg.style = 'width:20px; margin-left:5px';
-
             resultElement.appendChild(cogitImg);
+            
             console.log(code);
             console.log(codeLanguage);
             console.log(codeRunningTime);
@@ -80,8 +78,7 @@ function getResult(isActive) {
           } else {
             loadingImg.remove();
             var cogitGreyImg = document.createElement('img');
-            cogitGreyImg.src =
-              'https://cogitusercode.s3.ap-northeast-2.amazonaws.com/assets/cogit_gray.png';
+            cogitImg.src = chrome.runtime.getURL("assets/images/cogit_gray.png");
             cogitGreyImg.style = 'width:20px; margin-left:5px';
             resultElement.appendChild(cogitGreyImg);
           }
