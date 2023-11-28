@@ -1,113 +1,100 @@
 const PLATFORM_URL = 'https://www.acmicpc.net/problem/';
 
-let solutionElements = document.querySelectorAll('[id^="solution-"]');
-
-
-if (solutionElements.length > 0) {
-  let firstSolutionElement = solutionElements[0];
-  let spanElement = firstSolutionElement.querySelector('span[data-color]');
-
-  let preContent = spanElement.textContent;
-
-  let isActive = false;
+function checkActive(callback) {
+  //코깃 활성화 여부
   chrome.storage.local.get('active', function (result) {
-    if (result.active) {
-      if (result.active == 'active') {
-        isActive = true;
-      }
+    if (result.active && result.active == 'active') {
+      callback(true);
+    } else {
+      callback(false);
     }
   });
-  
-  if (preContent.includes('중')) {
+}
 
+function getResult(isActive) {
+  if (isActive && localStorage.getItem('code')) {
+    const code = localStorage.getItem('code'); //제출한 코드 가지고 오기
+    localStorage.removeItem('code');
+
+    let firstSolutionElement = document.querySelector('[id^="solution-"]');
     let resultElement = firstSolutionElement.querySelector('.result');
-    let loadingImg = document.createElement('img');
-    loadingImg.src = 'https://cogitusercode.s3.ap-northeast-2.amazonaws.com/assets/loading.gif';
-    loadingImg.style = 'width:20px';
-    resultElement.appendChild(loadingImg);
+    let preContent = resultElement.querySelector('span').textContent;
 
-    // 2초 간격으로 내용 확인
-    const intervalId = setInterval(function () {
-      chrome.storage.local.get('active', function (result) {
-        if (result.active) {
-          if (result.active == 'deactive') {
-            clearInterval(intervalId); // setInterval 중지
-          }
-        }
-      });
-      solutionElements = document.querySelectorAll('[id^="solution-"]');
-      firstSolutionElement = solutionElements[0];
-      spanElement = firstSolutionElement.querySelector('span[data-color]');
+    if (preContent.includes('중')) {
+      firstSolutionElement = document.querySelector('[id^="solution-"]');
+      resultElement = firstSolutionElement.querySelector('.result');
+      let loadingImg = document.createElement('img');
+      loadingImg.src = 'https://cogitusercode.s3.ap-northeast-2.amazonaws.com/assets/loading.gif';
+      loadingImg.style = 'width:20px';
+      resultElement.appendChild(loadingImg);
 
-      if (spanElement) {
-        let currentContent = spanElement.textContent;
+      // 2초 간격으로 내용 확인
+      const intervalId = setInterval(function () {
+        firstSolutionElement = document.querySelector('[id^="solution-"]');
+        resultElement = firstSolutionElement.querySelector('.result');
+        let currentContent = resultElement.querySelector('span').textContent;
 
         if (currentContent === preContent && !currentContent.includes('중')) {
+          //채점 완료
           clearInterval(intervalId); // setInterval 중지
+
           let codeLanguage = firstSolutionElement
             .querySelector('td:nth-child(7)')
             .querySelector('a')
             .textContent.trim();
           let codeFileExtension = baekjoonExtension[codeLanguage];
           codeLanguage = baekjoonLanguages[codeLanguage];
-          let codeRunningTime = firstSolutionElement.querySelector('.time').textContent;
+          let codeRunningTime = firstSolutionElement.querySelector('.time').textContent + 'ms';
           let algorithmQuestId = firstSolutionElement
             .querySelector('td:nth-child(3)')
             .querySelector('a').textContent;
+          let algorithmName = firstSolutionElement
+            .querySelector('td:nth-child(3)')
+            .querySelector('a')
+            .getAttribute('data-original-title');
 
-          if (localStorage.getItem('code')) {
-            var code = localStorage.getItem('code');
+          if (currentContent.includes('맞았습니다')) {
+            loadingImg.remove();
+            var cogitImg = document.createElement('img');
+            cogitImg.src = 'https://cogitusercode.s3.ap-northeast-2.amazonaws.com/assets/cogit.png';
+            cogitImg.style = 'width:20px; margin-left:5px';
 
-            if (currentContent.includes('맞았습니다')) {
-              loadingImg.remove();
-              var cogitImg = document.createElement('img');
-              cogitImg.src =
-                'https://cogitusercode.s3.ap-northeast-2.amazonaws.com/assets/cogit.png';
-              cogitImg.style = 'width:20px; margin-left:5px';
-              
-              spanElement.appendChild(cogitImg);
+            resultElement.appendChild(cogitImg);
+            console.log(code);
+            console.log(codeLanguage);
+            console.log(codeRunningTime);
+            console.log(algorithmQuestId);
+            console.log(algorithmName);
+            console.log(codeFileExtension);
 
-              sendCode(
-                code,
-                true,
-                'BAEKJOON',
-                codeLanguage,
-                codeRunningTime,
-                algorithmQuestId,
-                codeFileExtension,
-                `${PLATFORM_URL}${algorithmQuestId}`
-              );
-
-            } else if (
-              currentContent.includes('틀렸습니다') ||
-              currentContent.includes('시간 초과') ||
-              currentContent.includes('메모리 초과')
-            ) {
-              loadingImg.remove();
-              var cogitGreyImg = document.createElement('img');
-              cogitGreyImg.src =
-                'https://cogitusercode.s3.ap-northeast-2.amazonaws.com/assets/cogit_gray.png';
-              cogitGreyImg.style = 'width:20px; margin-left:5px';
-              spanElement.appendChild(cogitGreyImg);
-
-              sendCode(
-                code,
-                false,
-                'BAEKJOON',
-                codeLanguage,
-                codeRunningTime,
-                algorithmQuestId,
-                codeFileExtension,
-                `${PLATFORM_URL}${algorithmQuestId}`
-              );
-
-            }
+            // sendCode(
+            //   code,
+            //   true,
+            //   'BAEKJOON',
+            //   codeLanguage,
+            //   codeRunningTime,
+            //   algorithmQuestId,
+            //   codeFileExtension,
+            //   `${PLATFORM_URL}${algorithmQuestId}`
+            // );
+          } else {
+            loadingImg.remove();
+            var cogitGreyImg = document.createElement('img');
+            cogitGreyImg.src =
+              'https://cogitusercode.s3.ap-northeast-2.amazonaws.com/assets/cogit_gray.png';
+            cogitGreyImg.style = 'width:20px; margin-left:5px';
+            resultElement.appendChild(cogitGreyImg);
           }
+        } else {
+          preContent = currentContent; // 현재 내용을 저장
         }
-        preContent = currentContent; // 현재 내용을 저장
-      }
-    }, 2000);
+      }, 2000);
+    } else {
+      console.log('이미 전송한 코드입니다.');
+    }
   } else {
-    console.log('이미 전송한 코드입니다.');
+    localStorage.removeItem('code');
   }
 }
+
+checkActive(getResult);
