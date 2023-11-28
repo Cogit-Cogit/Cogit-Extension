@@ -48,22 +48,24 @@ async function getRepo(hook, token) {
 }
 
 async function createHook() {
+  const repoName = document.getElementById('name').value;
+
+  // TODO: name이 영어로만 이루어져있는지 확인
+  if (repoName === '') {
+    return;
+  }
+
   chrome.storage.local.get('cogit_token').then(async (data) => {
-    console.log(data.cogit_token);
-    // TODO: user name 가져오기
-    const user = '';
-    const name = document.getElementById('name').value;
-    console.log('name is: ', name);
-    // TODO: name이 영어로만 이루어져있는지 확인
-    if (name === '') {
-      return;
-    }
     const token = data.cogit_token;
-    const existRepo = await getRepo(`${user}/${name}`, token);
-    if (existRepo) {
-    } else {
-      createRepo(name, token, true);
-    }
+
+    chrome.storage.local.get('cogit_id').then(async (data) => {
+      const userName = data.cogit_id;
+      const existRepo = await getRepo(`${userName}/${repoName}`, token);
+
+      if (!existRepo) {
+        createRepo(repoName, token, true);
+      }
+    });
   });
 }
 
