@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/welcome.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+      rel="stylesheet"
+    />
+    <script src="/library/semantic.min.js"></script>
+  </head>
+
+  <body>
+    <div class="ui grid container">
+      <div class="sixteen wide center aligned column">
+        <br />
+        <p class="caption" style="font-size: 9em">Cogit Cogit</p>
+        <p class="caption">
+          Automatically sync your code from Baekjoon to GitHub
+        </p>
+        <br /><br /><br /><br /><br /><br /><br /><br />
+        <p hidden id="error"></p>
+        <p hidden id="success"></p>
+        <p hidden id="unlink">Linked the wrong repo? <a>Unlink</a>.</p>
+      </div>
+
+      <!-- Create Hook -->
+      <div style="display: block" id="hook_mode" class="ui grid container">
+        <div class="six wide column">
+          <p class="caption ui large header center aligned">Sync Repository</p>
+        </div>
+        <div class="six wide column">
+          <div class="ui form">
+            <div class="field">
+              <input
+                autocomplete="off"
+                id="name"
+                placeholder="Repository Name"
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="sixteen wide right aligned column">
+          <br />
+          <button id="hook_button" class="positive ui button">Sync Repo</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="welcome.js"></script>
+  </body>
+</html>
