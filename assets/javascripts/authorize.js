@@ -36,7 +36,7 @@ function getAccessToken(code) {
           chrome.storage.local.set({ cogit_token: accessToken });
           getUserInfo(accessToken);
         });
-        window.close();
+        // window.close();
       } else {
         throw new Error('토큰을 요청하지 못했습니다.');
       }
@@ -48,18 +48,21 @@ function getAccessToken(code) {
 
 /* user 정보 가지고 오기*/
 function getUserInfo(accessToken) {
+  console.log('유저정보 가쟈오기');
   fetch('https://api.github.com/user', {
     method: 'GET',
     headers: {
       Accept: 'application/json',
-      Authorization: "Bearer " + accessToken
+      Authorization: 'Bearer ' + accessToken,
     },
   })
     .then((response) => {
-      if (response.ok) { 
+      if (response.ok) {
+        console.log('OK');
         response.json().then((data) => {
           const gitHubId = data.login;
           chrome.storage.local.set({ cogit_id: gitHubId });
+          chrome.storage.local.get('cogit_id').then((result) => {});
         });
       } else {
         throw new Error('사용자 정보를 가져오지 못하였습니다.');
@@ -71,7 +74,10 @@ function getUserInfo(accessToken) {
 }
 
 /* Check for open pipe */
-if (window.location.host === 'github.com' && window.location.href.includes('?code=')) {
+if (
+  window.location.host === 'github.com' &&
+  window.location.href.includes('?code=')
+) {
   const link = window.location.href;
   // pipe_cogit 정보가 있으면 (현재 로그인 중이면)
   chrome.storage.local.get('pipe_cogit', (data) => {

@@ -22,7 +22,7 @@ function getResult(isActive) {
       firstSolutionElement = document.querySelector('[id^="solution-"]');
       resultElement = firstSolutionElement.querySelector('.result');
       let loadingImg = document.createElement('img');
-      loadingImg.src = chrome.runtime.getURL("assets/images/loading.gif");
+      loadingImg.src = chrome.runtime.getURL('assets/images/loading.gif');
       loadingImg.style = 'width:20px';
       resultElement.appendChild(loadingImg);
 
@@ -42,7 +42,8 @@ function getResult(isActive) {
             .textContent.trim();
           let codeFileExtension = baekjoonExtension[codeLanguage];
           codeLanguage = baekjoonLanguages[codeLanguage];
-          let codeRunningTime = firstSolutionElement.querySelector('.time').textContent + 'ms';
+          let codeRunningTime =
+            firstSolutionElement.querySelector('.time').textContent + 'ms';
           let algorithmQuestId = firstSolutionElement
             .querySelector('td:nth-child(3)')
             .querySelector('a').textContent;
@@ -54,10 +55,10 @@ function getResult(isActive) {
           if (currentContent.includes('맞았습니다')) {
             loadingImg.remove();
             var cogitImg = document.createElement('img');
-            cogitImg.src = chrome.runtime.getURL("assets/images/cogit.png");
+            cogitImg.src = chrome.runtime.getURL('assets/images/cogit.png');
             cogitImg.style = 'width:20px; margin-left:5px';
             resultElement.appendChild(cogitImg);
-            
+
             console.log(code);
             console.log(codeLanguage);
             console.log(codeRunningTime);
@@ -65,20 +66,22 @@ function getResult(isActive) {
             console.log(algorithmName);
             console.log(codeFileExtension);
 
-            // sendCode(
-            //   code,
-            //   true,
-            //   'BAEKJOON',
-            //   codeLanguage,
-            //   codeRunningTime,
-            //   algorithmQuestId,
-            //   codeFileExtension,
-            //   `${PLATFORM_URL}${algorithmQuestId}`
-            // );
+            uploadCode(
+              code,
+              true,
+              'BAEKJOON',
+              codeLanguage,
+              codeRunningTime,
+              algorithmQuestId,
+              codeFileExtension,
+              algorithmName
+            );
           } else {
             loadingImg.remove();
             var cogitGreyImg = document.createElement('img');
-            cogitImg.src = chrome.runtime.getURL("assets/images/cogit_gray.png");
+            cogitImg.src = chrome.runtime.getURL(
+              'assets/images/cogit_gray.png'
+            );
             cogitGreyImg.style = 'width:20px; margin-left:5px';
             resultElement.appendChild(cogitGreyImg);
           }
