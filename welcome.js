@@ -65,6 +65,8 @@ async function createHook() {
       if (!existRepo) {
         createRepo(repoName, token, true);
       }
+
+      chrome.storage.local.set({ cogit_repo: `${userName}/${repoName}` });
     });
   });
 }
