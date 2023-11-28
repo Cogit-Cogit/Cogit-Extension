@@ -6,6 +6,12 @@
   "background": {
     "service_worker": "/assets/javascripts/background.js"
   },
+  "web_accessible_resources": [
+    {
+      "resources": ["/assets/images/cogit.png","/assets/images/cogit_gray.png","/assets/images/loading.gif"],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "content_scripts": [
     {
       "matches": ["https://www.acmicpc.net/submit/*"],
