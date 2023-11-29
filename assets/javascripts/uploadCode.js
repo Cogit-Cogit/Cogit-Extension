@@ -23,7 +23,7 @@ async function uploadCode(
       const { refSHA, ref } = await git.getReference();
       const source = await git.createBlob(
         codeContent,
-        `${algorithmName}.${codeFileExtension}`
+        `${algorithmQuestPlatform}/${algorithmName}.${codeFileExtension}`
       );
       const treeSha = await git.createTree(refSHA, [source]);
       const commitSha = await git.createCommit(
@@ -32,6 +32,10 @@ async function uploadCode(
         refSHA
       );
       await git.updateHead(ref, commitSha);
+      const beakjoonCnt = await git.getFileList('BAEKJOON');
+      const programmersCnt = await git.getFileList('PROGRAMMERS');
+      console.log('백준: ', beakjoonCnt, ' 프로그래머스: ', programmersCnt);
+      createModal(true);
     });
   });
 }
