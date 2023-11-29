@@ -63,7 +63,7 @@ async function createHook(event) {
       const userName = data.cogit_id;
       const existRepo = await getRepo(`${userName}/${repoName}`, token);
 
-      if (token === null || userName === null) {
+      if (token === undefined || userName === undefined) {
         alert('로그인이 필요합니다.');
         return;
       }
@@ -78,5 +78,15 @@ async function createHook(event) {
   });
 }
 
+async function removeHook() {
+  if (!confirm('현재 연결된 레포지토리를 해제하시겠습니까?')) return;
+  chrome.storage.local.remove('cogit_repo', function () {
+    alert('연결이 해제 되었습니다.');
+  });
+}
+
 const syncForm = document.getElementById('syncForm');
 syncForm.addEventListener('submit', createHook);
+
+const unsyncButton = document.getElementById('unsync-button');
+unsyncButton.addEventListener('click', removeHook);
