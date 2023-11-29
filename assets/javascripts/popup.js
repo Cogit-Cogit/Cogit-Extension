@@ -1,6 +1,6 @@
 const AUTHORIZATION_URL = 'https://github.com/login/oauth/authorize';
-const CLIENT_ID = '8f0485d786b3f5eba00e';
-const GITHUB_CLIENT_SECRET = '45ef1ad0380204292293bacc888173c17d039ad5';
+// const CLIENT_ID = '8f0485d786b3f5eba00e';
+// const GITHUB_CLIENT_SECRET = '45ef1ad0380204292293bacc888173c17d039ad5';
 const REDIRECT_URL = 'https://github.com'; // 변경 필요
 const SCOPES = [
   'repo',
@@ -58,8 +58,8 @@ document.addEventListener('DOMContentLoaded', function () {
     for (let i = 0; i < SCOPES.length; i++) {
       url += SCOPES[i] + ' ';
     }
-
-    chrome.storage.local.set({ pipe_cogit: true }, () => {
+    console.log('login');
+    chrome.storage.local.set({ 'pipe_cogit': true }, () => {
       // opening pipe temporarily
       chrome.tabs.create({ url, selected: true }, function () {
         window.close();
@@ -70,8 +70,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const loginButton = document.getElementById('authenticate');
   loginButton.addEventListener('click', login);
 
-  chrome.storage.local.get('cogit', function (data) {
-    if (data.cogit) {
+  chrome.storage.local.get('pipe_cogit', function (data) {
+    console.log(data.pipe_cogit);
+    if (data.pipe_cogit) {
       // cogit 인증 데이터가 존재하면, 로그인 버튼 숨김
       var authModeElement = document.getElementById('auth_mode');
       if (authModeElement) {
@@ -83,6 +84,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const cogitLink = document.getElementById('cogitLink');
   cogitLink.addEventListener('click', function () {
-    window.open('https://cogit.kr/redirect', '_blank');
+    chrome.storage.local.remove('pipe_cogit');
+    chrome.storage.local.remove('cogit_token');
+    chrome.storage.local.remove('cogit_id');
+    window.close();
   });
 });
