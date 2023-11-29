@@ -55,6 +55,7 @@ function getResult(isActive) {
             console.log(algorithmName);
             console.log(codeFileExtension);
 
+            createModal(true);
             uploadCode(
               code,
               true,
