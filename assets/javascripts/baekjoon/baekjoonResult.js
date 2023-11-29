@@ -88,3 +88,6 @@ function getResult(isActive) {
 }
 
 checkActive(getResult);
+
+
+createModal(true);
