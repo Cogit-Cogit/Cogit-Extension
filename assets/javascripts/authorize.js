@@ -86,6 +86,7 @@ if (
       if (code != null) {
         // 인가코드를 통해, git api 요청(엑세스토큰)
         getAccessToken(code);
+        chrome.storage.local.set({ pipe_cogit: false });
       }
     }
   });

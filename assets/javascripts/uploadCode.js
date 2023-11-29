@@ -12,6 +12,12 @@ async function uploadCode(
     const token = data.cogit_token;
     chrome.storage.local.get('cogit_repo').then(async (data) => {
       const hook = data.cogit_repo;
+
+      if (token === undefined || hook === undefined) {
+        console.log('업로드 할 수 없습니다.');
+        return;
+      }
+
       const git = new GitHub(hook, token);
 
       const { refSHA, ref } = await git.getReference();
