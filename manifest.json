@@ -40,7 +40,9 @@
         "/assets/javascripts/programmers/programmers.js",
         "/assets/javascripts/programmers/programmersLanguage.js",
         "/assets/javascripts/uploadCode.js",
-        "/assets/javascripts/authorize.js"
+        "/assets/javascripts/authorize.js",
+        "/assets/javascripts/Github.js",
+        "/assets/javascripts/utils.js"
       ]
     },
     {
