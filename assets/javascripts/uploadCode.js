@@ -35,7 +35,7 @@ async function uploadCode(
       const beakjoonCnt = await git.getFileList('BAEKJOON');
       const programmersCnt = await git.getFileList('PROGRAMMERS');
       console.log('백준: ', beakjoonCnt, ' 프로그래머스: ', programmersCnt);
-      createModal(true);
+      await createModal(true);
     });
   });
 }
