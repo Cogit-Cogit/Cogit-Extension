@@ -31,8 +31,7 @@ function getResult(isActive) {
             .textContent.trim();
           let codeFileExtension = baekjoonExtension[codeLanguage];
           codeLanguage = baekjoonLanguages[codeLanguage];
-          let codeRunningTime =
-            firstSolutionElement.querySelector('.time').textContent + 'ms';
+          let codeRunningTime = firstSolutionElement.querySelector('.time').textContent + 'ms';
           let algorithmQuestId = firstSolutionElement
             .querySelector('td:nth-child(3)')
             .querySelector('a').textContent;
@@ -68,9 +67,7 @@ function getResult(isActive) {
           } else {
             loadingImg.remove();
             var cogitGreyImg = document.createElement('img');
-            cogitImg.src = chrome.runtime.getURL(
-              'assets/images/cogit_gray.png'
-            );
+            cogitImg.src = chrome.runtime.getURL('assets/images/cogit_gray.png');
             cogitGreyImg.style = 'width:20px; margin-left:5px';
             resultElement.appendChild(cogitGreyImg);
           }
@@ -87,6 +84,5 @@ function getResult(isActive) {
 }
 
 checkActive(getResult);
-
 
 createModal(true);

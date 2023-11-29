@@ -26,6 +26,7 @@
     {
       "matches": ["https://www.acmicpc.net/status?*"],
       "js": [
+        "/assets/javascripts/saveModalData.js",
         "/assets/javascripts/checkActive.js",
         "/assets/javascripts/modal.js",
         "/assets/javascripts/baekjoon/baekjoonResult.js",

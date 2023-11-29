@@ -1,4 +1,4 @@
-function createModal(isCorrect) {
+function createModal(isCorrect, days) {
   // 모달 창을 생성할 요소들을 만듭니다.
   const modal = document.createElement('div');
   modal.id = 'cogit_modal';
@@ -22,7 +22,6 @@ function createModal(isCorrect) {
   //     ${isCorrect ? '코드를 git에 업로드합니다.' : '안타깝습니다.'}
   // `;
 
-  var days = 0;
   content.innerHTML = `<h2 class="days">${days}</h2> <p>days</p>`;
 
   const baekjoon = document.createElement('div');
