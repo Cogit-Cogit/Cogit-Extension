@@ -10,6 +10,9 @@ const programmersLanguages = {
   "Ruby": "Ruby",
   "Scala": "Scala",
   "Swift": "Swift",
+  "MySQL": "MySQL",
+  "Oracle": "Oracle"
+
 };
 
 const programmersExtension = {
@@ -23,4 +26,6 @@ const programmersExtension = {
   "Ruby": "rb",
   "Scala": "scala",
   "Swift": "swift",
+  "MySQL": "sql",
+  "Oracle": "sql"
 }
