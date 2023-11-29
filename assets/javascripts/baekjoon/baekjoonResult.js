@@ -1,14 +1,3 @@
-function checkActive(callback) {
-  //코깃 활성화 여부
-  chrome.storage.local.get('active', function (result) {
-    if (result.active && result.active == 'active') {
-      callback(true);
-    } else {
-      callback(false);
-    }
-  });
-}
-
 function getResult(isActive) {
   if (isActive && localStorage.getItem('code')) {
     const code = localStorage.getItem('code'); //제출한 코드 가지고 오기

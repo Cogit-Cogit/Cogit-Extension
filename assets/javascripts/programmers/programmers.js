@@ -1,19 +1,6 @@
-const PLATFORM_URL = 'https://school.programmers.co.kr/learn/courses/30/lessons/';
+function saveCode(isActive) {
+  if (!isActive) return;
 
-const submitButton = document.getElementById('submit-code');
-if (submitButton != null) {
-  submitButton.addEventListener('click', function () {
-    chrome.storage.local.get('active', function (result) {
-      if (result.active) {
-        if (result.active == 'active') {
-          saveCode();
-        }
-      }
-    });
-  });
-}
-
-function saveCode() {
   let codeLanguage = document.getElementById('tour7').querySelector('button').textContent.trim();
   let codeFileExtension = programmersExtension[codeLanguage];
   codeLanguage = programmersLanguages[codeLanguage];
@@ -29,7 +16,7 @@ function saveCode() {
 
   let funcButtons = document.querySelector('.func-buttons');
   let loadingImg = document.createElement('img');
-  loadingImg.src = 'https://cogitusercode.s3.ap-northeast-2.amazonaws.com/assets/loading.gif';
+  loadingImg.src = chrome.runtime.getURL('assets/images/loading.gif');
   loadingImg.style = 'width:30px';
   funcButtons.prepend(loadingImg);
 
@@ -37,9 +24,11 @@ function saveCode() {
     let modalTitle = document.querySelector('.modal-title');
     codeResult = modalTitle.textContent;
     var codeRunningTime = 0;
-    var algorithmQuestNumber = document
+    var algorithmQuestId = document
       .querySelector('div.main > div.lesson-content')
       .getAttribute('data-lesson-id');
+
+    var algorithmName = document.querySelector('.challenge-title').textContent;
 
     if (codeResult && !codeResult.includes('로딩중')) {
       clearInterval(intervalId);
@@ -59,40 +48,44 @@ function saveCode() {
             runTimes.push(parseFloat(runTime[1]));
           }
         }
-        codeRunningTime = runTimes.reduce((acc, value) => acc + value, 0) / runTimes.length;
-        result = true;
+        codeRunningTime = runTimes.reduce((acc, value) => acc + value, 0) / runTimes.length + 'ms';
 
-        sendCode(
+        console.log(codeContent);
+        console.log(codeLanguage);
+        console.log(codeRunningTime);
+        console.log(algorithmQuestId);
+        console.log(algorithmName);
+        console.log(codeFileExtension);
+
+        uploadCode(
           codeContent,
-          result,
+          true,
           'PROGRAMMERS',
           codeLanguage,
           codeRunningTime,
-          algorithmQuestNumber,
+          algorithmQuestId,
           codeFileExtension,
-          `${PLATFORM_URL}${algorithmQuestNumber}`
+          algorithmName
         );
 
-        cogitImg.src = 'https://cogitusercode.s3.ap-northeast-2.amazonaws.com/assets/cogit.png';
+        loadingImg.remove();
+        cogitImg.src = chrome.runtime.getURL('assets/images/cogit.png');
         cogitImg.style = 'width:30px; margin-left:10px';
         modalTitle.appendChild(cogitImg);
-      } else {
-        sendCode(
-          codeContent,
-          result,
-          'PROGRAMMERS',
-          codeLanguage,
-          codeRunningTime,
-          algorithmQuestNumber,
-          codeFileExtension,
-          `${PLATFORM_URL}${algorithmQuestNumber}`
-        );
 
-        cogitImg.src =
-          'https://cogitusercode.s3.ap-northeast-2.amazonaws.com/assets/cogit_gray.png';
+      } else {
+        loadingImg.remove();
+        cogitImg.src = chrome.runtime.getURL('assets/images/cogit_gray.png');
         cogitImg.style = 'width:30px; margin-left:10px';
         modalTitle.appendChild(cogitImg);
       }
     }
   }, 2000);
+}
+
+const submitButton = document.getElementById('submit-code');
+if (submitButton != null) {
+  submitButton.addEventListener('click', function () {
+    checkActive(saveCode);
+  });
 }
