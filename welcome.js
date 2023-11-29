@@ -47,7 +47,8 @@ async function getRepo(hook, token) {
   });
 }
 
-async function createHook() {
+async function createHook(event) {
+  event.preventDefault();
   const repoName = document.getElementById('name').value;
 
   // TODO: name이 영어로만 이루어져있는지 확인
@@ -62,14 +63,20 @@ async function createHook() {
       const userName = data.cogit_id;
       const existRepo = await getRepo(`${userName}/${repoName}`, token);
 
-      if (!existRepo) {
-        createRepo(repoName, token, true);
+      if (token === null || userName === null) {
+        alert('로그인이 필요합니다.');
+        return;
       }
+
+      if (!existRepo) {
+        await createRepo(repoName, token, true);
+        alert('Repository가 생성되었습니다.');
+      } else alert('repository가 연결되었습니다.');
 
       chrome.storage.local.set({ cogit_repo: `${userName}/${repoName}` });
     });
   });
 }
 
-const hookButton = document.getElementById('hook_button');
-hookButton.addEventListener('click', createHook);
+const syncForm = document.getElementById('syncForm');
+syncForm.addEventListener('submit', createHook);
