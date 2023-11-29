@@ -41,9 +41,7 @@ async function getRepo(hook, token) {
     console.log(res.status);
     if (res.status === 200) {
       return true;
-    } else {
-      return false;
-    }
+    } else return false;
   });
 }
 

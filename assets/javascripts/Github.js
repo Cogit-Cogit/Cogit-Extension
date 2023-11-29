@@ -1,6 +1,6 @@
 class GitHub {
   constructor(hook, token) {
-    console.log('GitHub constructor', hook, token);
+    // console.log('GitHub constructor', hook, token);
     this.update(hook, token);
   }
 
@@ -21,34 +21,39 @@ class GitHub {
 
   async createTree(refSHA, tree_items) {
     // hook, token, baseSHA, tree_items
-    console.log(
-      'GitHub createTree',
-      'refSHA:',
-      refSHA,
-      'tree_items:',
-      tree_items
-    );
+    // console.log(
+    //   'GitHub createTree',
+    //   'refSHA:',
+    //   refSHA,
+    //   'tree_items:',
+    //   tree_items
+    // );
     return createTree(this.hook, this.token, refSHA, tree_items);
   }
 
   async createCommit(message, treeSHA, refSHA) {
     // hook, token, message, tree, parent
-    console.log(
-      'GitHub createCommit',
-      'message:',
-      message,
-      'treeSHA:',
-      treeSHA,
-      'refSHA:',
-      refSHA
-    );
+    // console.log(
+    //   'GitHub createCommit',
+    //   'message:',
+    //   message,
+    //   'treeSHA:',
+    //   treeSHA,
+    //   'refSHA:',
+    //   refSHA
+    // );
     return createCommit(this.hook, this.token, message, treeSHA, refSHA);
   }
 
   async updateHead(ref, commitSHA) {
     // hook, token, commitSHA, force = true)
-    console.log('GitHub updateHead', 'ref:', ref, 'commitSHA:', commitSHA);
+    // console.log('GitHub updateHead', 'ref:', ref, 'commitSHA:', commitSHA);
     return updateHead(this.hook, this.token, ref, commitSHA, true);
+  }
+
+  async getFileList(platform) {
+    console.log(platform, 'repo 파일 갯수 확인');
+    return getFileList(this.hook, this.token, platform);
   }
 }
 
@@ -107,8 +112,6 @@ async function createBlob(hook, token, content, path) {
  * @returns
  */
 async function createTree(hook, token, refSHA, tree_items) {
-  console.log(refSHA, tree_items);
-  console.log(token);
   return fetch(`https://api.github.com/repos/${hook}/git/trees`, {
     method: 'POST',
     body: JSON.stringify({ tree: tree_items, base_tree: refSHA }),
@@ -171,5 +174,22 @@ async function updateHead(hook, token, ref, commitSHA, force = true) {
     .then((res) => res.json())
     .then((data) => {
       return data.sha;
+    });
+}
+
+async function getFileList(hook, token, platform) {
+  return fetch(`https://api.github.com/repos/${hook}/contents/${platform}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/vnd.github.v3+json',
+      'content-type': 'application/json',
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      // console.log(data);
+      if (data.length !== undefined) return data.length;
+      else return 0;
     });
 }
