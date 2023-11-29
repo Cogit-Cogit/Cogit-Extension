@@ -26,9 +26,9 @@ function countDay() { //연속 풀이 날
 }
 
 
-async function createModal(isCorrect) {
+async function createModal(isCorrect, baekjoonCnt, programmersCnt) {
   let days = await countDay();
-  console.log(days);
+  
   // 모달 창을 생성할 요소들을 만듭니다.
   const modal = document.createElement('div');
   modal.id = 'cogit_modal';
@@ -57,14 +57,12 @@ async function createModal(isCorrect) {
   const baekjoon = document.createElement('div');
   baekjoon.classList.add('baekjoon');
   var baekjoonImg = chrome.runtime.getURL('assets/images/baekjoon.png');
-  var baekjoonCnt = 0;
-  baekjoon.innerHTML = `<img src="${baekjoonImg}" alt="baekjoon"/><p>+ ${baekjoonCnt}</p>`;
+  baekjoon.innerHTML = `<img src="${baekjoonImg}" alt="baekjoon"/><p> + ${baekjoonCnt}</p>`;
 
   const programmers = document.createElement('div');
   programmers.classList.add('programmers');
   var programmersImg = chrome.runtime.getURL('assets/images/programmers.png');
-  var programmersCnt = 0;
-  programmers.innerHTML = `<img src="${programmersImg}" alt="baekjoon"/> <p>+ ${programmersCnt}</p>`;
+  programmers.innerHTML = `<img src="${programmersImg}" alt="baekjoon"/> <p> + ${programmersCnt}</p>`;
 
   const cogit = document.createElement('div');
   cogit.classList.add('cogit');

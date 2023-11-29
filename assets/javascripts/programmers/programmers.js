@@ -50,13 +50,6 @@ function saveCode(isActive) {
         }
         codeRunningTime = runTimes.reduce((acc, value) => acc + value, 0) / runTimes.length + 'ms';
 
-        console.log(codeContent);
-        console.log(codeLanguage);
-        console.log(codeRunningTime);
-        console.log(algorithmQuestId);
-        console.log(algorithmName);
-        console.log(codeFileExtension);
-
         uploadCode(
           codeContent,
           true,
@@ -80,7 +73,7 @@ function saveCode(isActive) {
         modalTitle.appendChild(cogitImg);
       }
     }
-  }, 2000);
+  }, 1000);
 }
 
 const submitButton = document.getElementById('submit-code');
