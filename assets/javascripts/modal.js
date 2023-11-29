@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 function createModal(isCorrect, days) {
+=======
+function createModal(isCorrect) {
+>>>>>>> 41c0a142bbebf95717289d3fd480b13a16f4bb76
   // 모달 창을 생성할 요소들을 만듭니다.
   const modal = document.createElement('div');
   modal.id = 'cogit_modal';
