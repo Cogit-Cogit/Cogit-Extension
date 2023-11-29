@@ -24,13 +24,13 @@
     {
       "matches": ["https://www.acmicpc.net/status?*"],
       "js": [
+        "/assets/javascripts/checkActive.js",
         "/assets/javascripts/baekjoon/baekjoonResult.js",
         "/assets/javascripts/baekjoon/baekjoonLanguage.js",
         "/assets/javascripts/uploadCode.js",
         "/assets/javascripts/authorize.js",
         "/assets/javascripts/Github.js",
-        "/assets/javascripts/utils.js",
-        "/assets/javascripts/checkActive.js"
+        "/assets/javascripts/utils.js"
       ]
     },
     {
