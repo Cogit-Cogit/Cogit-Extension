@@ -16,7 +16,7 @@ function getResult(isActive) {
       resultElement.appendChild(loadingImg);
 
       // 2초 간격으로 내용 확인
-      const intervalId = setInterval(function () {
+      const intervalId = setInterval(async function () {
         firstSolutionElement = document.querySelector('[id^="solution-"]');
         resultElement = firstSolutionElement.querySelector('.result');
         let currentContent = resultElement.querySelector('span').textContent;
@@ -55,7 +55,6 @@ function getResult(isActive) {
             console.log(algorithmName);
             console.log(codeFileExtension);
 
-            createModal(true);
             uploadCode(
               code,
               true,
