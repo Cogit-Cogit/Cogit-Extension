@@ -1,6 +1,6 @@
 {
   "name": "코깃코깃 (CogitCogit)",
-  "description": "백준/프로그래머스 코드 자동 commit 및 알고리즘 스터디 관리",
+  "description": "백준(Baekjoon) / 프로그래머스(Programmers) 코드 GitHub 자동 push",
   "version": "1.1.0",
   "manifest_version": 3,
   "background": {
