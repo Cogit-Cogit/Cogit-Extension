@@ -70,9 +70,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const loginButton = document.getElementById('authenticate');
   loginButton.addEventListener('click', login);
 
-  chrome.storage.local.get('pipe_cogit', function (data) {
-    console.log(data.pipe_cogit);
-    if (data.pipe_cogit) {
+  chrome.storage.local.get('cogit_id', function (data) {
+    console.log(data.cogit_id);
+    if (data.cogit_id) {
       // cogit 인증 데이터가 존재하면, 로그인 버튼 숨김
       var authModeElement = document.getElementById('auth_mode');
       if (authModeElement) {
@@ -84,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const cogitLink = document.getElementById('cogitLink');
   cogitLink.addEventListener('click', function () {
-    chrome.storage.local.remove('pipe_cogit');
     chrome.storage.local.remove('cogit_token');
     chrome.storage.local.remove('cogit_id');
     window.close();

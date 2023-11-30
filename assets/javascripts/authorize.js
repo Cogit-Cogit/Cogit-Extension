@@ -37,7 +37,7 @@ function getAccessToken(code) {
           chrome.storage.local.set({ cogit_token: accessToken });
           getUserInfo(accessToken);
         });
-        // window.close();
+        window.close();
       } else {
         throw new Error('토큰을 요청하지 못했습니다.');
       }
@@ -86,7 +86,7 @@ if (
       if (code != null) {
         // 인가코드를 통해, git api 요청(엑세스토큰)
         getAccessToken(code);
-        // chrome.storage.local.set({ pipe_cogit: false });
+        chrome.storage.local.set({ pipe_cogit: false });
       }
     }
   });
