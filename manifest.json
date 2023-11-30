@@ -1,7 +1,7 @@
 {
   "name": "코깃코깃 (CogitCogit)",
   "description": "백준/프로그래머스 코드 자동 commit 및 알고리즘 스터디 관리",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "manifest_version": 3,
   "background": {
     "service_worker": "/assets/javascripts/background.js"
@@ -66,9 +66,9 @@
     }
   },
   "icons": {
-    "16": "/assets/images/cogit.PNG",
-    "32": "/assets/images/cogit.PNG",
-    "48": "/assets/images/cogit.PNG",
-    "128": "/assets/images/cogit.PNG"
+    "16": "/assets/images/cogit.png",
+    "32": "/assets/images/cogit.png",
+    "48": "/assets/images/cogit.png",
+    "128": "/assets/images/cogit.png"
   }
 }
