@@ -7,13 +7,17 @@
   </head>
   <body>
     <div id="container">
-      <h1>Cogit Cogit</h1>
+      <h1 id="title">
+        <span style="color: #619fff">COGIT</span>
+        <span style="color: #c3d9fb">COGIT</span>
+      </h1>
       <p>Automatically sync your code from Baekjoon to GitHub</p>
       <form id="syncForm">
         <input type="text" id="name" placeholder="Repository 입력" />
         <input type="submit" value="Sync Repo" />
         <button id="unsync-button">Unsync Repo</button>
       </form>
+      <p id="repo"></p>
     </div>
     <script type="text/javascript" src="welcome.js"></script>
   </body>

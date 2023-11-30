@@ -40,24 +40,38 @@ input[type='submit'] {
   padding: 10px 20px;
   border-radius: 5px;
   border: none;
-  background-color: #007bff;
+  background-color: #F79F5F;
   color: white;
   cursor: pointer;
 }
 
 input[type='submit']:hover {
-  background-color: #0056b3;
+  background-color: #C3D9FB;
 }
 
 #unsync-button {
   padding: 10px 20px;
   border-radius: 5px;
   border: none;
-  background-color: #007bff;
+  background-color: #bbb;
   color: white;
   cursor: pointer;
 }
 
 #unsync-button:hover {
-  background-color: #0056b3;
+  background-color: #C3D9FB;
+}
+
+#title {
+  font-size: 40px;
+  font-weight: 900;
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
+
+
+#repo{
+  font-size: 15px;
+  font-weight: 500;
+  color: #B3B3B3;
 }

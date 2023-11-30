@@ -76,12 +76,25 @@ async function createHook(event) {
   });
 }
 
+async function currentRepo() {
+  chrome.storage.local.get('cogit_repo').then(async (data) => {
+    console.log(data.cogit_repo);
+    if (!data.cogit_repo) {
+      document.getElementById("repo").innerHTML = '연결된 Repository가 없습니다.';
+    } else {
+      document.getElementById("repo").innerHTML = '현재 Repository : ' + data.cogit_repo;
+    }
+  })
+}
+
 async function removeHook() {
   if (!confirm('현재 연결된 레포지토리를 해제하시겠습니까?')) return;
   chrome.storage.local.remove('cogit_repo', function () {
     alert('연결이 해제 되었습니다.');
   });
 }
+
+currentRepo();
 
 const syncForm = document.getElementById('syncForm');
 syncForm.addEventListener('submit', createHook);

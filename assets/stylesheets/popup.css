@@ -77,7 +77,7 @@ body {
 }
 
 #auth_mode {
-  margin: 20px;
+  margin: 20px 10px 10px;
 }
 
 #cogitLink {
@@ -95,4 +95,15 @@ body {
 
 #active {
   margin: 30px;
+}
+
+#logout {
+  background-color: #C3D9FB; 
+  color: #619FFF; 
+  font-size: 15px;
+  font-weight: 900;
+}
+
+#home{
+  margin: 10px;
 }
