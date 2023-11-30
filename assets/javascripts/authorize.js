@@ -17,6 +17,7 @@ function parseAccessCode(url) {
 
 /* 깃허브 엑세스 토큰 발급 */
 function getAccessToken(code) {
+  console.log('토큰');
   fetch('https://github.com/login/oauth/access_token', {
     method: 'POST',
     headers: {
@@ -48,7 +49,7 @@ function getAccessToken(code) {
 
 /* user 정보 가지고 오기*/
 function getUserInfo(accessToken) {
-  console.log('유저정보 가쟈오기');
+  console.log('user id');
   fetch('https://api.github.com/user', {
     method: 'GET',
     headers: {
@@ -58,7 +59,6 @@ function getUserInfo(accessToken) {
   })
     .then((response) => {
       if (response.ok) {
-        console.log('OK');
         response.json().then((data) => {
           const gitHubId = data.login;
           chrome.storage.local.set({ cogit_id: gitHubId });
@@ -86,7 +86,7 @@ if (
       if (code != null) {
         // 인가코드를 통해, git api 요청(엑세스토큰)
         getAccessToken(code);
-        chrome.storage.local.set({ pipe_cogit: false });
+        // chrome.storage.local.set({ pipe_cogit: false });
       }
     }
   });

@@ -26,7 +26,6 @@
     {
       "matches": ["https://www.acmicpc.net/status?*"],
       "js": [
-        "/assets/javascripts/saveModalData.js",
         "/assets/javascripts/checkActive.js",
         "/assets/javascripts/modal.js",
         "/assets/javascripts/baekjoon/baekjoonResult.js",
@@ -41,14 +40,14 @@
     {
       "matches": ["https://school.programmers.co.kr/learn/courses/30/lessons/*"],
       "js": [
+        "/assets/javascripts/checkActive.js",
         "/assets/javascripts/modal.js",
         "/assets/javascripts/programmers/programmers.js",
         "/assets/javascripts/programmers/programmersLanguage.js",
         "/assets/javascripts/uploadCode.js",
         "/assets/javascripts/authorize.js",
         "/assets/javascripts/Github.js",
-        "/assets/javascripts/utils.js",
-        "/assets/javascripts/checkActive.js"
+        "/assets/javascripts/utils.js"
       ]
     },
     {

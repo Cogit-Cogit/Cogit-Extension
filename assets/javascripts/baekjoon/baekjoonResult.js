@@ -1,6 +1,8 @@
 function getResult(isActive) {
+  console.log(isActive);
   if (isActive && localStorage.getItem('code')) {
     const code = localStorage.getItem('code'); //제출한 코드 가지고 오기
+    console.log(code);
     localStorage.removeItem('code');
 
     let firstSolutionElement = document.querySelector('[id^="solution-"]');
@@ -15,7 +17,7 @@ function getResult(isActive) {
       loadingImg.style = 'width:20px';
       resultElement.appendChild(loadingImg);
 
-      // 2초 간격으로 내용 확인
+      // 1초 간격으로 내용 확인
       const intervalId = setInterval(async function () {
         firstSolutionElement = document.querySelector('[id^="solution-"]');
         resultElement = firstSolutionElement.querySelector('.result');
@@ -41,19 +43,6 @@ function getResult(isActive) {
             .getAttribute('data-original-title');
 
           if (currentContent.includes('맞았습니다')) {
-            loadingImg.remove();
-            var cogitImg = document.createElement('img');
-            cogitImg.src = chrome.runtime.getURL('assets/images/cogit.png');
-            cogitImg.style = 'width:20px; margin-left:5px';
-            resultElement.appendChild(cogitImg);
-
-            console.log(code);
-            console.log(codeLanguage);
-            console.log(codeRunningTime);
-            console.log(algorithmQuestId);
-            console.log(algorithmName);
-            console.log(codeFileExtension);
-
             uploadCode(
               code,
               true,
@@ -64,6 +53,12 @@ function getResult(isActive) {
               codeFileExtension,
               algorithmName
             );
+
+            loadingImg.remove();
+            var cogitImg = document.createElement('img');
+            cogitImg.src = chrome.runtime.getURL('assets/images/cogit.png');
+            cogitImg.style = 'width:20px; margin-left:5px';
+            resultElement.appendChild(cogitImg);
           } else {
             loadingImg.remove();
             var cogitGreyImg = document.createElement('img');
@@ -74,7 +69,7 @@ function getResult(isActive) {
         } else {
           preContent = currentContent; // 현재 내용을 저장
         }
-      }, 2000);
+      }, 1000);
     } else {
       console.log('이미 전송한 코드입니다.');
     }
@@ -84,5 +79,3 @@ function getResult(isActive) {
 }
 
 checkActive(getResult);
-
-createModal(true);
