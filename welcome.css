@@ -25,7 +25,7 @@ h1 {
 
 p {
   font-size: 1.2rem;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   color: #666;
 }
 
@@ -74,4 +74,10 @@ input[type='submit']:hover {
   font-size: 15px;
   font-weight: 500;
   color: #B3B3B3;
+}
+
+#caution{
+  font-size: 15px;
+  color: #F79F5F;
+  margin-bottom: 30px;
 }
