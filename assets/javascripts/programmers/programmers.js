@@ -22,7 +22,9 @@ function saveCode(isActive) {
 
   const intervalId = setInterval(function () {
     let modalTitle = document.querySelector('.modal-title');
-    codeResult = modalTitle.textContent;
+    if (modalTitle) {
+      codeResult = modalTitle.textContent;
+    }
     var codeRunningTime = 0;
     var algorithmQuestId = document
       .querySelector('div.main > div.lesson-content')
