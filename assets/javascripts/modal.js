@@ -131,7 +131,7 @@ style.textContent = `
 #cogit_modal .title {
   // display: inline;
   text-align: center;
-  padding: 40px 40px 10px;
+  padding: 20px 30px 10px;
 }
 #cogit_modal .title h2 {
   display: inline;
@@ -151,7 +151,7 @@ style.textContent = `
 }
 
 #cogit_modal .content {
-  padding: 30px;
+  padding: 10px;
   margin: 10px;
 }
 
@@ -159,7 +159,6 @@ style.textContent = `
   color: #B3B3B3;
   text-align: center;
   font-size: 20px;
-  padding-top: 10px;
   font-weight: 700;
 }
 #cogit_modal .days {
