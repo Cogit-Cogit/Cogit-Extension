@@ -1,8 +1,7 @@
 function getResult(isActive) {
-  console.log(isActive);
+
   if (isActive && localStorage.getItem('code')) {
     const code = localStorage.getItem('code'); //제출한 코드 가지고 오기
-    console.log(code);
     localStorage.removeItem('code');
 
     let firstSolutionElement = document.querySelector('[id^="solution-"]');

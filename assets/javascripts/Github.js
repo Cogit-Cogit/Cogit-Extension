@@ -52,7 +52,7 @@ class GitHub {
   }
 
   async getFileList(platform) {
-    console.log(platform, 'repo 파일 갯수 확인');
+    // console.log(platform, 'repo 파일 갯수 확인');
     return getFileList(this.hook, this.token, platform);
   }
 }
