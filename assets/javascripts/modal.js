@@ -13,8 +13,12 @@ function countDay() { //연속 풀이 날
         chrome.storage.sync.set({ nextday: stirngNext });
         chrome.storage.sync.get(["combo"], (result) => {
           chrome.storage.sync.set({ combo: result.combo + 1 });
-          console.log(result.combo + 1);
           resolve(result.combo + 1);
+        });
+      } else if (result.nextday == stirngNext) { //같은 날 푼 거
+        chrome.storage.sync.get(["combo"], (result) => {
+          chrome.storage.sync.set({ combo: result.combo});
+          resolve(result.combo);
         });
       } else {
         chrome.storage.sync.set({ nextday: stirngNext });
