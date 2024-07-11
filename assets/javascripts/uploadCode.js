@@ -23,7 +23,7 @@ async function uploadCode(
       const { refSHA, ref } = await git.getReference();
       const source = await git.createBlob(
         codeContent,
-        `${algorithmQuestPlatform}/${algorithmName}.${codeFileExtension}`
+        `${algorithmQuestPlatform}/${algorithmQuestNumber}_${algorithmName}.${codeFileExtension}`
       );
       const treeSha = await git.createTree(refSHA, [source]);
       const commitSha = await git.createCommit(

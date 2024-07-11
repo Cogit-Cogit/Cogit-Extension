@@ -4,9 +4,7 @@ async function saveCode(isActive) {
   let codeLanguage = document.getElementById('tour7').querySelector('button').textContent.trim();
   let codeFileExtension = programmersExtension[codeLanguage];
   codeLanguage = programmersLanguages[codeLanguage];
-
   const codeContent = document.querySelector('textarea#code').value;
-  console.log(codeContent);
 
   let codeResult = document.querySelector('.modal-title');
   if (codeResult) {
