@@ -1,6 +1,5 @@
 async function uploadCode(
   codeContent,
-  codeSolved,
   algorithmQuestPlatform,
   codeLanguage,
   codeRunningTime,
@@ -36,7 +35,7 @@ async function uploadCode(
       let baekjoonCnt = await git.getFileList('BAEKJOON');
       let programmersCnt = await git.getFileList('PROGRAMMERS');
       // console.log('백준: ', baekjoonCnt, ' 프로그래머스: ', programmersCnt);
-      await createModal(true,baekjoonCnt, programmersCnt);
+      await createModal(true, baekjoonCnt, programmersCnt);
     });
   });
 }

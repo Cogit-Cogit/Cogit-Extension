@@ -1,4 +1,4 @@
-function getResult(isActive) {
+async function getResult(isActive) {
 
   if (isActive && localStorage.getItem('code')) {
     const code = localStorage.getItem('code'); //제출한 코드 가지고 오기
@@ -42,9 +42,8 @@ function getResult(isActive) {
             .getAttribute('data-original-title');
 
           if (currentContent.includes('맞았습니다')) {
-            uploadCode(
+            await uploadCode(
               code,
-              true,
               'BAEKJOON',
               codeLanguage,
               codeRunningTime,

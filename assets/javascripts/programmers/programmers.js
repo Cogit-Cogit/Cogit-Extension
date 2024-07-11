@@ -1,13 +1,12 @@
-function saveCode(isActive) {
+async function saveCode(isActive) {
   if (!isActive) return;
 
   let codeLanguage = document.getElementById('tour7').querySelector('button').textContent.trim();
   let codeFileExtension = programmersExtension[codeLanguage];
   codeLanguage = programmersLanguages[codeLanguage];
 
-  const codeMirrorLines = document.querySelectorAll('.CodeMirror-line');
-  const linesContent = Array.from(codeMirrorLines).map((line) => line.textContent);
-  const codeContent = linesContent.join('\n');
+  const codeContent = document.querySelector('textarea#code').value;
+  console.log(codeContent);
 
   let codeResult = document.querySelector('.modal-title');
   if (codeResult) {
@@ -20,7 +19,7 @@ function saveCode(isActive) {
   loadingImg.style = 'width:30px';
   funcButtons.prepend(loadingImg);
 
-  const intervalId = setInterval(function () {
+  const intervalId = setInterval(async function () {
     let modalTitle = document.querySelector('.modal-title');
     if (modalTitle) {
       codeResult = modalTitle.textContent;
@@ -34,8 +33,6 @@ function saveCode(isActive) {
 
     if (codeResult && !codeResult.includes('로딩중')) {
       clearInterval(intervalId);
-
-      let result = false;
 
       funcButtons.remove();
       let cogitImg = document.createElement('img');
@@ -52,9 +49,8 @@ function saveCode(isActive) {
         }
         codeRunningTime = runTimes.reduce((acc, value) => acc + value, 0) / runTimes.length + 'ms';
 
-        uploadCode(
+        await uploadCode(
           codeContent,
-          true,
           'PROGRAMMERS',
           codeLanguage,
           codeRunningTime,
@@ -67,7 +63,6 @@ function saveCode(isActive) {
         cogitImg.src = chrome.runtime.getURL('assets/images/cogit.png');
         cogitImg.style = 'width:30px; margin-left:10px';
         modalTitle.appendChild(cogitImg);
-
       } else {
         loadingImg.remove();
         cogitImg.src = chrome.runtime.getURL('assets/images/cogit_gray.png');
